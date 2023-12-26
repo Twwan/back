@@ -1,0 +1,30 @@
+/statistic/user:
+  post:
+    tags:
+      - Statistic
+    summary: Push user statistic
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [ pageCountSimpleMode, pageCountWordMode ]
+            properties:
+              pageCountSimpleMode:
+                type: integer
+                example: 2353
+              pageCountWordMode:
+                type: integer
+                example: 2353
+              date:
+                type: string
+                format: date-time
+  
+    responses:
+      "200":
+        description: OK
+      "401":
+        $ref: '#definitions/unauthorized'
+      "500":
+        $ref: '#definitions/error'

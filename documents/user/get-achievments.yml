@@ -1,0 +1,65 @@
+/account/achievements:
+  get:
+    tags:
+      - User
+    summary: Get user's achievements
+  
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                baby:
+                  type: object
+                  properties:
+                    name: 
+                      type: string
+                      example: baby1
+                    picture:
+                      type: string
+                      example: http://localhost:5000/achievements/baby1.png
+                    description:
+                      type: string
+                      example: Первый вход в игру
+                    isReceived:
+                      type: boolean
+                      example: true
+                    date:
+                      type: date
+                      format: date-time
+                    _id:
+                      type: string
+                      example: 6539000a7809f92285a59cba
+                spell:
+                  type: object
+                  properties:
+                    name: 
+                      type: string
+                      example: spell1
+                    picture:
+                      type: string
+                      example: http://localhost:5000/achievements/spell1.png
+                    description:
+                      type: string
+                      example: 7 дней с нами
+                    isReceived:
+                      type: boolean
+                      example: true
+                    _id:
+                      type: string
+                      example: 6539000a7809f92285a59cba
+                simpleModeAchievements:
+                  type: array
+                  items:
+                    $ref: '#definitions/achievement' 
+                wordModeAchievements:
+                  type: array
+                  items:
+                    $ref: '#definitions/achievement' 
+      "401":
+        $ref: '#definitions/unauthorized'
+      "500":
+        $ref: '#definitions/error'

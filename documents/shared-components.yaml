@@ -1,0 +1,128 @@
+definitions:
+
+  validations:
+    description: Unprocessable Entity
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: min
+                  stack:
+                    type: array
+                    items:
+                      type: string
+                      example: <field>
+                  message:
+                    type: string
+                    example: <field> must be at least 8 characters
+  achievement:
+    type: object
+    properties:
+      name: 
+        type: string
+        example: rune1
+      picture:
+        type: string
+        example: http://localhost:5000/achievements/rune1.png
+      description:
+        type: string
+        example: 1 место за день в городе
+      isReceived:
+        type: boolean
+        example: true
+      dateAffiliation:
+        type: string
+        enum:
+          - 1d
+          - 7d
+          - 1m
+          - 6m
+          - 1y
+        example: 1d
+      regionalAffiliation:
+        type: string
+        enum:
+          - CITY
+          - AREA
+          - ALL
+        example: ALL
+      _id:
+        type: string
+        example: 6539000a7809f92285a59cba
+      date:
+        type: string
+        format: date-time
+
+  bad-request:
+    description: Bad request
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Invalid data
+
+  unauthorized:
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: You need authorization
+
+  forbidden:
+    description: Forbidden
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Account is not verified
+
+  not-found:
+    description: Not found
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Not found
+
+  conflict:
+    description: Conflict
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Already exists
+
+  error:
+    description: Error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              example: Oops, something went wrong
