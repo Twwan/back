@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { Validator } from "../../core/validation.js";
-import SimpleController from "./controller.js";
-import { messageDto } from "./dto/message-dto.js";
+import UserController from "./controller.js";
+import { authDto } from "./dto/auth-dto.js";
 
 const router = new Router();
 
-router.post("/auth", Validator.validate(messageDto), SimpleController.registration);
-router.post("/reg", Validator.validate(messageDto), SimpleController.registration);
-router.get("/profile", Validator.validate(messageDto), SimpleController.registration);
+router.post("/auth", Validator.validate(authDto), UserController.authorization);
+router.post("/reg", Validator.validate(authDto), UserController.registration);
+router.get("/profile", Validator.validate(authDto), UserController.profile);
 
 export default router;

@@ -3,10 +3,12 @@ import Routing from "./core/routes.js";
 import Server from "./core/server.js";
 import SwaggerDoc from "./core/swagger.js";
 import UserRouter from "./modules/user/router.js";
+import MovieRouter from "./modules/movie/router.js";
+import BioRouter from "./modules/bio/router.js";
 
 const APP_PORT = process.env.PORT || 7000;
 
-new Server([
+new Server(APP_PORT, [
     // ! Мирон, это адаптер для постгры, делаешь на монге (реши что со стеком) - я дам тебе другой адаптер
     new MongoAdapter({
         database: process.env.DB_NAME,
@@ -17,8 +19,8 @@ new Server([
     }),
     // ! Мирон, это для роутинга, оно надо
     new Routing([{ prefix: "/user", router: UserRouter }]),
-    new Routing([{ prefix: "/person", router: UserRouter }]),
-    new Routing([{ prefix: "/movie", router: UserRouter }]),
+    new Routing([{ prefix: "/person", router: BioRouter }]),
+    new Routing([{ prefix: "/movie", router: MovieRouter }]),
     // ! Мирон, это для документации. Если тебе не надо - не прописывай new Swagger...
     new SwaggerDoc(
         {

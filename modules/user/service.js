@@ -1,8 +1,8 @@
 import { Types } from "mongoose";
-import { TokenGuard } from "../../core/token-guard";
-import User from "./models/user";
+import { TokenGuard } from "../../core/token-guard.js";
+import User from "./models/user.js";
 
-class SimpleService {
+class UserService {
     async regUser(doc) {
         const userExistStatus = await User.findOne({ login: doc.login });
         if (userExistStatus) return false;
@@ -16,6 +16,11 @@ class SimpleService {
         if (!userExistStatus || userExistStatus.password != doc.password) return false;
         return TokenGuard.generate({ _id: userExistStatus._id });
     }
+
+    async getUser(doc) {
+        const userData = await User.findById(_id).select("-password");
+        return userData;
+    }
 }
 
-export default SimpleService;
+export default UserService;

@@ -1,17 +1,16 @@
 import autoBind from "auto-bind";
-import SimpleService from "./service.js";
+import MovieService from "./service.js";
 
-class SimpleController {
-    #simpleService;
+class MovieController {
+    #movieService;
     constructor() {
         autoBind(this);
-        this.#simpleService = new SimpleService();
+        this.#movieService = new MovieService();
     }
 
-    async simpleController(req, res) {
+    async movie(req, res) {
         try {
-            const result = await this.#simpleService.simpleServiceMethod(req.body.message);
-            res.status(200).json(result);
+            res.status(200).json(await this.#movieService.getUser(req.getMovie._id));
         } catch (error) {
             console.log(error.message);
             res.status(500).json({ message: "Oops, something went wrong!" });
@@ -19,4 +18,4 @@ class SimpleController {
     }
 }
 
-export default new SimpleController();
+export default new MovieController();
